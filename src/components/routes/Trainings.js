@@ -10,7 +10,7 @@ function Trainings() {
 
   useEffect(() => {
     fetchTrainings();
-  });
+  }, []);
 
   const fetchTrainings = () => {
     fetch("https://customerrest.herokuapp.com/gettrainings")
@@ -25,7 +25,8 @@ function Trainings() {
       field: "date",
       sortable: true,
       filter: true,
-      //valueFormatter: (params) => format(params.value, "dd.MM.yyyy"),
+      valueFormatter: (params) =>
+        format(new Date(params.value), "dd.MM.yyyy HH:mm aaa"),
     },
     { field: "duration", sortable: true, filter: true },
     {
