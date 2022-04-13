@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
+import { format } from "date-fns";
 
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";
@@ -12,19 +13,28 @@ function Trainings() {
   });
 
   const fetchTrainings = () => {
-    fetch("https://customerrest.herokuapp.com/api/trainings")
+    fetch("https://customerrest.herokuapp.com/gettrainings")
       .then((response) => response.json())
-      .then((responseData) => setTrainings(responseData.content))
+      .then((responseData) => setTrainings(responseData))
       .then((err) => console.error(err));
   };
 
   const [columnDefs] = useState([
-    { field: "date", sortable: true, filter: true },
-    { field: "duration", sortable: true, filter: true },
     { field: "activity", sortable: true, filter: true },
     {
+      field: "date",
+      sortable: true,
+      filter: true,
+      //valueFormatter: (params) => format(params.value, "dd.MM.yyyy"),
+    },
+    { field: "duration", sortable: true, filter: true },
+    {
       headerName: "Customer",
-      field: "links[2]",
+      valueGetter(params) {
+        return (
+          params.data.customer.firstname + " " + params.data.customer.lastname
+        );
+      },
       sortable: true,
       filter: true,
     },
@@ -32,10 +42,7 @@ function Trainings() {
 
   return (
     <>
-      <div
-        className="ag-theme-material"
-        style={{ height: 700, width: "80%", margin: "auto" }}
-      >
+      <div className="ag-theme-material" style={{ height: 700, width: "70%" }}>
         <AgGridReact
           rowData={trainings}
           columnDefs={columnDefs}

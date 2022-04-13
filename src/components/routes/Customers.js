@@ -19,9 +19,24 @@ function Customers() {
   };
 
   const [columnDefs] = useState([
-    { field: "firstname", sortable: true, filter: true },
-    { field: "lastname", sortable: true, filter: true },
-    { field: "streetaddress", sortable: true, filter: true },
+    {
+      headerName: "First Name",
+      field: "firstname",
+      sortable: true,
+      filter: true,
+    },
+    {
+      headerName: "Last Name",
+      field: "lastname",
+      sortable: true,
+      filter: true,
+    },
+    {
+      headerName: "Street Address",
+      field: "streetaddress",
+      sortable: true,
+      filter: true,
+    },
     { field: "postcode", sortable: true, filter: true },
     { field: "city", sortable: true, filter: true },
     { field: "email", sortable: true, filter: true },
