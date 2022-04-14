@@ -1,5 +1,5 @@
 import "./App.css";
-import ResponsiveAppBar from "./components/ResponsiveAppBar";
+import NavAppBar from "./components/NavAppBar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Customers from "./components/routes/Customers";
 import Trainings from "./components/routes/Trainings";
@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <ResponsiveAppBar />
+        <NavAppBar />
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/customers" element={<Customers />}></Route>
