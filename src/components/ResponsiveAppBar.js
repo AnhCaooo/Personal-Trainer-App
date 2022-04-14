@@ -7,11 +7,10 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-
 import Button from "@mui/material/Button";
-
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 
 const pages = ["customers", "trainings"];
 
@@ -36,7 +35,7 @@ const ResponsiveAppBar = () => {
             component="div"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
-            PERSONAL TRAINER
+            <FitnessCenterIcon />
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -88,7 +87,7 @@ const ResponsiveAppBar = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
           >
-            PERSONAL TRAINEER
+            <FitnessCenterIcon />
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
