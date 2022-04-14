@@ -43,7 +43,10 @@ function Trainings() {
 
   return (
     <>
-      <div className="ag-theme-material" style={{ height: 700, width: "70%" }}>
+      <div
+        className="ag-theme-material"
+        style={{ height: 700, width: "65%", margin: "auto" }}
+      >
         <AgGridReact
           rowData={trainings}
           columnDefs={columnDefs}
