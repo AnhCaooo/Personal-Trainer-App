@@ -20,17 +20,32 @@ function Trainings() {
   };
 
   const [columnDefs] = useState([
-    { field: "activity", sortable: true, filter: true },
     {
+      headerName: "Activity",
+      field: "activity",
+      sortable: true,
+      filter: true,
+      flex: 1,
+    },
+    {
+      headerName: "Date",
       field: "date",
       sortable: true,
       filter: true,
+      flex: 1,
       valueFormatter: (params) =>
         format(new Date(params.value), "dd.MM.yyyy HH:mm aaa"),
     },
-    { field: "duration", sortable: true, filter: true },
+    {
+      headerName: "Duration",
+      field: "duration",
+      sortable: true,
+      filter: true,
+      flex: 1,
+    },
     {
       headerName: "Customer",
+      flex: 1,
       valueGetter(params) {
         return (
           params.data.customer.firstname + " " + params.data.customer.lastname

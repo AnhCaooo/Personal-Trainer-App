@@ -85,6 +85,7 @@ function Customers() {
       sortable: true,
       filter: true,
       width: 130,
+      flex: 1,
     },
     {
       headerName: "Last Name",
@@ -92,21 +93,52 @@ function Customers() {
       sortable: true,
       filter: true,
       width: 130,
+      flex: 1,
     },
-    { field: "email", sortable: true, filter: true, width: 170 },
-    { field: "phone", sortable: true, filter: true, width: 140 },
+    {
+      headerName: "Email",
+      field: "email",
+      sortable: true,
+      filter: true,
+      width: 170,
+      flex: 1,
+    },
+    {
+      headerName: "Phone",
+      field: "phone",
+      sortable: true,
+      filter: true,
+      width: 140,
+      flex: 1,
+    },
     {
       headerName: "Street Address",
       field: "streetaddress",
       sortable: true,
       filter: true,
       width: 170,
+      flex: 1,
     },
-    { field: "postcode", sortable: true, filter: true, width: 120 },
-    { field: "city", sortable: true, filter: true, width: 110 },
+    {
+      headerName: "Postcode",
+      field: "postcode",
+      sortable: true,
+      filter: true,
+      width: 120,
+      flex: 1,
+    },
+    {
+      headerName: "City",
+      field: "city",
+      sortable: true,
+      filter: true,
+      width: 110,
+      flex: 1,
+    },
     {
       headerName: "",
       field: "link",
+      flex: 1,
       cellRenderer: (params) => (
         <EditCustomer params={params} updateCustomer={updateCustomer} />
       ),
@@ -114,7 +146,7 @@ function Customers() {
     {
       headerName: "",
       field: "link",
-      width: 100,
+      flex: 1,
       cellRenderer: (params) => (
         <IconButton color="error" onClick={() => deleteCustomer(params.value)}>
           <DeleteIcon />
