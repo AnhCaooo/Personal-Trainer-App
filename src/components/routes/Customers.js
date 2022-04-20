@@ -3,8 +3,8 @@ import { AgGridReact } from "ag-grid-react";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Snackbar from "@mui/material/Snackbar";
-import AddCustomer from "../AddCustomer";
-import EditCustomer from "../EditCustomer";
+import AddCustomer from "../subcomponents/AddCustomer";
+import EditCustomer from "../subcomponents/EditCustomer";
 
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";
@@ -21,61 +21,15 @@ function Customers() {
     fetch("https://customerrest.herokuapp.com/api/customers")
       .then((response) => response.json())
       .then((responseData) => {
-        //console.log(responseData.content);
         const customers = responseData.content.map((customer) => {
           customer.link = customer.links[0].href;
           return customer;
         });
-        //console.log(customers);
         setCustomers(customers);
       })
 
       .catch((err) => console.error(err));
   };
-  const [columnDefs] = useState([
-    {
-      headerName: "First Name",
-      field: "firstname",
-      sortable: true,
-      filter: true,
-      width: 130,
-    },
-    {
-      headerName: "Last Name",
-      field: "lastname",
-      sortable: true,
-      filter: true,
-      width: 130,
-    },
-    { field: "email", sortable: true, filter: true, width: 170 },
-    { field: "phone", sortable: true, filter: true, width: 140 },
-    {
-      headerName: "Street Address",
-      field: "streetaddress",
-      sortable: true,
-      filter: true,
-      width: 170,
-    },
-    { field: "postcode", sortable: true, filter: true, width: 120 },
-    { field: "city", sortable: true, filter: true, width: 110 },
-    {
-      headerName: "",
-      field: "link",
-      cellRenderer: (params) => (
-        <EditCustomer params={params} updateCustomer={updateCustomer} />
-      ),
-    },
-    {
-      headerName: "",
-      field: "link",
-      width: 100,
-      cellRenderer: (params) => (
-        <IconButton color="error" onClick={() => deleteCustomer(params.value)}>
-          <DeleteIcon />
-        </IconButton>
-      ),
-    },
-  ]);
 
   const deleteCustomer = (link) => {
     if (window.confirm("Are you sure?")) {
@@ -123,6 +77,51 @@ function Customers() {
       })
       .catch((err) => console.error(err));
   };
+
+  const [columnDefs] = useState([
+    {
+      headerName: "First Name",
+      field: "firstname",
+      sortable: true,
+      filter: true,
+      width: 130,
+    },
+    {
+      headerName: "Last Name",
+      field: "lastname",
+      sortable: true,
+      filter: true,
+      width: 130,
+    },
+    { field: "email", sortable: true, filter: true, width: 170 },
+    { field: "phone", sortable: true, filter: true, width: 140 },
+    {
+      headerName: "Street Address",
+      field: "streetaddress",
+      sortable: true,
+      filter: true,
+      width: 170,
+    },
+    { field: "postcode", sortable: true, filter: true, width: 120 },
+    { field: "city", sortable: true, filter: true, width: 110 },
+    {
+      headerName: "",
+      field: "link",
+      cellRenderer: (params) => (
+        <EditCustomer params={params} updateCustomer={updateCustomer} />
+      ),
+    },
+    {
+      headerName: "",
+      field: "link",
+      width: 100,
+      cellRenderer: (params) => (
+        <IconButton color="error" onClick={() => deleteCustomer(params.value)}>
+          <DeleteIcon />
+        </IconButton>
+      ),
+    },
+  ]);
 
   return (
     <>

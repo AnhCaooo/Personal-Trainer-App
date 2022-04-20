@@ -38,7 +38,7 @@ function EditCustomer({ params, updateCustomer }) {
   };
 
   const handleSave = () => {
-    updateCustomer(customer);
+    updateCustomer(customer, params.value);
     setOpen(false);
   };
 

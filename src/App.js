@@ -1,5 +1,5 @@
 import "./App.css";
-import NavAppBar from "./components/NavAppBar";
+import NavAppBar from "./components/subcomponents/NavAppBar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Customers from "./components/routes/Customers";
 import Trainings from "./components/routes/Trainings";
