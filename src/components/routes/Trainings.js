@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import { format } from "date-fns";
+import { IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";
+import AddTraining from "../subcomponents/AddTraining";
 
 function Trainings() {
   const [trainings, setTrainings] = useState([]);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     fetchTrainings();
@@ -17,6 +21,39 @@ function Trainings() {
       .then((response) => response.json())
       .then((responseData) => setTrainings(responseData))
       .then((err) => console.error(err));
+  };
+
+  const addTraining = (newTraining) => {
+    fetch("https://customerrest.herokuapp.com/api/trainings", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newTraining),
+    })
+      .then((response) => {
+        if (response.ok) {
+          fetchTrainings();
+        } else {
+          alert("Something went wrong when adding new training!");
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const deleteTraining = (id) => {
+    if (window.confirm("Are you sure?")) {
+      fetch(`https://customerrest.herokuapp.com/api/trainings/${id}`, {
+        method: "DELETE",
+      })
+        .then((response) => {
+          if (!response.ok) {
+            alert("Something went wrong while deleting customer's training!");
+          } else {
+            setOpen(true);
+            fetchTrainings();
+          }
+        })
+        .catch((err) => console.error(err));
+    }
   };
 
   const [columnDefs] = useState([
@@ -53,6 +90,16 @@ function Trainings() {
       },
       sortable: true,
       filter: true,
+    },
+    {
+      headerName: "",
+      flex: 1,
+      field: "id",
+      cellRenderer: (params) => (
+        <IconButton color="error" onClick={() => deleteTraining(params.value)}>
+          <DeleteIcon />
+        </IconButton>
+      ),
     },
   ]);
 

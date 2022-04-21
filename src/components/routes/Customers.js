@@ -84,7 +84,6 @@ function Customers() {
       field: "firstname",
       sortable: true,
       filter: true,
-      width: 130,
       flex: 1,
     },
     {
@@ -92,7 +91,6 @@ function Customers() {
       field: "lastname",
       sortable: true,
       filter: true,
-      width: 130,
       flex: 1,
     },
     {
@@ -100,7 +98,6 @@ function Customers() {
       field: "email",
       sortable: true,
       filter: true,
-      width: 170,
       flex: 1,
     },
     {
@@ -108,7 +105,6 @@ function Customers() {
       field: "phone",
       sortable: true,
       filter: true,
-      width: 140,
       flex: 1,
     },
     {
@@ -116,7 +112,6 @@ function Customers() {
       field: "streetaddress",
       sortable: true,
       filter: true,
-      width: 170,
       flex: 1,
     },
     {
@@ -124,7 +119,6 @@ function Customers() {
       field: "postcode",
       sortable: true,
       filter: true,
-      width: 120,
       flex: 1,
     },
     {
@@ -132,7 +126,6 @@ function Customers() {
       field: "city",
       sortable: true,
       filter: true,
-      width: 110,
       flex: 1,
     },
     {
