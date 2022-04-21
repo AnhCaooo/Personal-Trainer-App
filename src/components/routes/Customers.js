@@ -3,7 +3,7 @@ import { AgGridReact } from "ag-grid-react";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Snackbar from "@mui/material/Snackbar";
-
+import Alert from "@mui/material/Alert";
 import AddCustomer from "../subcomponents/AddCustomer";
 import EditCustomer from "../subcomponents/EditCustomer";
 import AddTraining from "../subcomponents/AddTraining";
@@ -14,6 +14,7 @@ import "ag-grid-community/dist/styles/ag-theme-material.css";
 function Customers() {
   const [customers, setCustomers] = useState([]);
   const [open, setOpen] = useState(false);
+  const [msg, setMsg] = useState("");
 
   useEffect(() => {
     fetchCustomers();
@@ -33,13 +34,14 @@ function Customers() {
       .catch((err) => console.error(err));
   };
 
-  const deleteCustomer = (link) => {
+  const deleteCustomer = async (link) => {
     if (window.confirm("Are you sure?")) {
-      fetch(link, { method: "DELETE" })
+      await fetch(link, { method: "DELETE" })
         .then((response) => {
           if (!response.ok) {
             alert("Something went wrong while deleting customer");
           } else {
+            setMsg("Customer deleted!");
             setOpen(true);
             fetchCustomers();
           }
@@ -48,14 +50,16 @@ function Customers() {
     }
   };
 
-  const addCustomer = (newCustomer) => {
-    fetch("https://customerrest.herokuapp.com/api/customers", {
+  const addCustomer = async (newCustomer) => {
+    await fetch("https://customerrest.herokuapp.com/api/customers", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newCustomer),
     })
       .then((response) => {
         if (response.ok) {
+          setMsg("Customer added successfully!");
+          setOpen(true);
           fetchCustomers();
         } else {
           alert("Something went wrong when adding new customer!");
@@ -64,14 +68,16 @@ function Customers() {
       .catch((err) => console.error(err));
   };
 
-  const updateCustomer = (updateCustomer, link) => {
-    fetch(link, {
+  const updateCustomer = async (updateCustomer, link) => {
+    await fetch(link, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updateCustomer),
     })
       .then((response) => {
         if (response.ok) {
+          setMsg("Customer profile was updated!");
+          setOpen(true);
           fetchCustomers();
         } else {
           alert("Something went wrong in editing customer profile!");
@@ -80,14 +86,16 @@ function Customers() {
       .catch((err) => console.error(err));
   };
 
-  const addTraining = (newTraining) => {
-    fetch("https://customerrest.herokuapp.com/api/trainings", {
+  const addTraining = async (newTraining) => {
+    await fetch("https://customerrest.herokuapp.com/api/trainings", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newTraining),
     })
       .then((response) => {
         if (response.ok) {
+          setMsg("Training was added for customer!");
+          setOpen(true);
           fetchCustomers();
         } else {
           alert("Something when wrong while adding training to the customer!");
@@ -155,7 +163,7 @@ function Customers() {
       ),
     },
     {
-      headerName: "Add training for customer",
+      headerName: "",
       field: "link",
       flex: 1,
       cellRenderer: (params) => (
@@ -193,8 +201,9 @@ function Customers() {
         open={open}
         autoHideDuration={3000}
         onClose={() => setOpen(false)}
-        message="Customer was deleted successfully"
-      />
+      >
+        <Alert severity="success">{msg}</Alert>
+      </Snackbar>
     </>
   );
 }

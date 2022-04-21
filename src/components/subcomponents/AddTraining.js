@@ -5,6 +5,8 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import { IconButton } from "@mui/material";
+import AddBoxIcon from "@mui/icons-material/AddBox";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
@@ -50,13 +52,10 @@ function AddTraining({ params, addTraining }) {
 
   return (
     <>
-      <Button
-        variant="outlined"
-        onClick={handleClickOpen}
-        style={{ marginTop: 10 }}
-      >
-        Add new training
-      </Button>
+      <IconButton variant="outlined" onClick={handleClickOpen}>
+        <AddBoxIcon />
+      </IconButton>
+
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>New Training</DialogTitle>
         <DialogContent>

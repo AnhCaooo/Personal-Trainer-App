@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";
@@ -11,6 +12,7 @@ import "ag-grid-community/dist/styles/ag-theme-material.css";
 function Trainings() {
   const [trainings, setTrainings] = useState([]);
   const [open, setOpen] = useState(false);
+  const [msg, setMsg] = useState("");
 
   useEffect(() => {
     fetchTrainings();
@@ -23,15 +25,16 @@ function Trainings() {
       .then((err) => console.error(err));
   };
 
-  const deleteTraining = (id) => {
+  const deleteTraining = async (id) => {
     if (window.confirm("Are you sure?")) {
-      fetch(`https://customerrest.herokuapp.com/api/trainings/${id}`, {
+      await fetch(`https://customerrest.herokuapp.com/api/trainings/${id}`, {
         method: "DELETE",
       })
         .then((response) => {
           if (!response.ok) {
             alert("Something went wrong while deleting customer's training!");
           } else {
+            setMsg("Training was deleted successfully");
             setOpen(true);
             fetchTrainings();
           }
@@ -104,8 +107,9 @@ function Trainings() {
         open={open}
         autoHideDuration={3000}
         onClose={() => setOpen(false)}
-        message="Training was deleted successfully"
-      />
+      >
+        <Alert severity="success">{msg}</Alert>
+      </Snackbar>
     </>
   );
 }
