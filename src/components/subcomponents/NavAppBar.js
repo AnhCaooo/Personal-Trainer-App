@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import HomeIcon from "@mui/icons-material/Home";
 
 function NavAppBar() {
   return (
@@ -14,7 +15,7 @@ function NavAppBar() {
         <Toolbar>
           <Typography variant="h6">
             <Link style={{ textDecoration: "none", color: "white" }} to="/">
-              <FitnessCenterIcon /> Home
+              <HomeIcon /> Home
             </Link>{" "}
             <Link
               style={{ textDecoration: "none", color: "white" }}
@@ -26,8 +27,14 @@ function NavAppBar() {
               style={{ textDecoration: "none", color: "white" }}
               to="/trainings"
             >
-              <CalendarMonthIcon /> Trainings
+              <FitnessCenterIcon /> Trainings
             </Link>{" "}
+            <Link
+              style={{ textDecoration: "none", color: "white" }}
+              to="/calendar"
+            >
+              <CalendarMonthIcon /> Calendar
+            </Link>
           </Typography>
         </Toolbar>
       </AppBar>

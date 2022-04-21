@@ -80,7 +80,7 @@ function Trainings() {
     },
     {
       headerName: "",
-      flex: 1,
+      width: 100,
       field: "id",
       cellRenderer: (params) => (
         <IconButton color="error" onClick={() => deleteTraining(params.value)}>
@@ -94,7 +94,7 @@ function Trainings() {
     <>
       <div
         className="ag-theme-material"
-        style={{ height: 650, width: "65%", margin: "auto" }}
+        style={{ height: 650, width: "50%", margin: "auto" }}
       >
         <AgGridReact
           rowData={trainings}

@@ -157,7 +157,7 @@ function Customers() {
     {
       headerName: "",
       field: "link",
-      flex: 1,
+      width: 100,
       cellRenderer: (params) => (
         <EditCustomer params={params} updateCustomer={updateCustomer} />
       ),
@@ -165,7 +165,7 @@ function Customers() {
     {
       headerName: "",
       field: "link",
-      flex: 1,
+      width: 100,
       cellRenderer: (params) => (
         <AddTraining addTraining={addTraining} params={params} />
       ),
@@ -173,7 +173,7 @@ function Customers() {
     {
       headerName: "",
       field: "link",
-      flex: 1,
+      width: 100,
       cellRenderer: (params) => (
         <IconButton color="error" onClick={() => deleteCustomer(params.value)}>
           <DeleteIcon />
