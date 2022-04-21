@@ -5,8 +5,11 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
-function AddTraining({ addTraining }) {
+function AddTraining({ params, addTraining }) {
   const [training, setTraining] = useState({
     date: "",
     activity: "",
@@ -17,6 +20,12 @@ function AddTraining({ addTraining }) {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
+    setTraining({
+      date: "",
+      activity: "",
+      duration: "",
+      customer: params.value,
+    });
     setOpen(true);
   };
 
@@ -51,15 +60,21 @@ function AddTraining({ addTraining }) {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>New Training</DialogTitle>
         <DialogContent>
-          <TextField
-            margin="dense"
-            name="date"
-            value={training.date}
-            onChange={inputChanged}
-            label="Date"
-            fullWidth
-            variant="standard"
-          />
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DateTimePicker
+              label="Date"
+              placeholder="Date"
+              value={training.date}
+              onChange={(newDate) =>
+                setTraining({ ...training, date: newDate })
+              }
+              inputFormat="dd.MM.yyyy HH:mm aaa"
+              renderInput={(params) => (
+                <TextField variant="standard" {...params} />
+              )}
+            />
+          </LocalizationProvider>
+
           <TextField
             margin="dense"
             name="activity"

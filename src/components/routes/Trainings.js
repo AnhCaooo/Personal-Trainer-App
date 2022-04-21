@@ -3,10 +3,10 @@ import { AgGridReact } from "ag-grid-react";
 import { format } from "date-fns";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Snackbar from "@mui/material/Snackbar";
 
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";
-import AddTraining from "../subcomponents/AddTraining";
 
 function Trainings() {
   const [trainings, setTrainings] = useState([]);
@@ -21,22 +21,6 @@ function Trainings() {
       .then((response) => response.json())
       .then((responseData) => setTrainings(responseData))
       .then((err) => console.error(err));
-  };
-
-  const addTraining = (newTraining) => {
-    fetch("https://customerrest.herokuapp.com/api/trainings", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newTraining),
-    })
-      .then((response) => {
-        if (response.ok) {
-          fetchTrainings();
-        } else {
-          alert("Something went wrong when adding new training!");
-        }
-      })
-      .catch((err) => console.error(err));
   };
 
   const deleteTraining = (id) => {
@@ -107,7 +91,7 @@ function Trainings() {
     <>
       <div
         className="ag-theme-material"
-        style={{ height: 700, width: "65%", margin: "auto" }}
+        style={{ height: 650, width: "65%", margin: "auto" }}
       >
         <AgGridReact
           rowData={trainings}
@@ -116,6 +100,12 @@ function Trainings() {
           paginationPageSize={10}
         ></AgGridReact>
       </div>
+      <Snackbar
+        open={open}
+        autoHideDuration={3000}
+        onClose={() => setOpen(false)}
+        message="Training was deleted successfully"
+      />
     </>
   );
 }

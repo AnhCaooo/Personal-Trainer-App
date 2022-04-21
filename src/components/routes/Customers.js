@@ -3,8 +3,10 @@ import { AgGridReact } from "ag-grid-react";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Snackbar from "@mui/material/Snackbar";
+
 import AddCustomer from "../subcomponents/AddCustomer";
 import EditCustomer from "../subcomponents/EditCustomer";
+import AddTraining from "../subcomponents/AddTraining";
 
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";
@@ -78,6 +80,22 @@ function Customers() {
       .catch((err) => console.error(err));
   };
 
+  const addTraining = (newTraining) => {
+    fetch("https://customerrest.herokuapp.com/api/trainings", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newTraining),
+    })
+      .then((response) => {
+        if (response.ok) {
+          fetchCustomers();
+        } else {
+          alert("Something when wrong while adding training to the customer!");
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
   const [columnDefs] = useState([
     {
       headerName: "First Name",
@@ -137,6 +155,14 @@ function Customers() {
       ),
     },
     {
+      headerName: "Add training for customer",
+      field: "link",
+      flex: 1,
+      cellRenderer: (params) => (
+        <AddTraining addTraining={addTraining} params={params} />
+      ),
+    },
+    {
       headerName: "",
       field: "link",
       flex: 1,
@@ -153,7 +179,7 @@ function Customers() {
       <AddCustomer addCustomer={addCustomer} />
       <div
         className="ag-theme-material"
-        style={{ height: 700, width: "80%", margin: "auto" }}
+        style={{ height: 650, width: "80%", margin: "auto" }}
       >
         <AgGridReact
           rowData={customers}
