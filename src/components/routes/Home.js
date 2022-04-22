@@ -4,8 +4,9 @@ function Home() {
   return (
     <>
       <h1>Welcome to Personal Trainer</h1>
-      <h2>Final Project - Front End Development - 2022</h2>
-      <h3>Anh Cao</h3>
+      <h3>Final Project - Front End Development - 2022</h3>
+      <h4>Teacher: Juha Hinkula</h4>
+      <p>Student: Anh Cao</p>
     </>
   );
 }

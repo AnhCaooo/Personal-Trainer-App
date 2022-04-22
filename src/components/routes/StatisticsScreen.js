@@ -59,7 +59,7 @@ function StatisticsScreen() {
             tickCount={6}
           />
           <Tooltip />
-          <Bar dataKey="duration" fill="#6495ED">
+          <Bar name="" dataKey="duration" fill="#6495ED">
             <LabelList dataKey="duration" position="top" />
           </Bar>
         </BarChart>
