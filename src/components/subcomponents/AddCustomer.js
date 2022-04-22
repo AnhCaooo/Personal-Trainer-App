@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
+import { IconButton } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 function AddCustomer({ addCustomer }) {
   const [customer, setCustomer] = useState({
@@ -47,13 +49,13 @@ function AddCustomer({ addCustomer }) {
 
   return (
     <>
-      <Button
-        variant="outlined"
+      <IconButton
+        color="primary"
         onClick={handleClickOpen}
         style={{ marginTop: 10 }}
       >
-        Add coming customer
-      </Button>
+        <AddCircleOutlineIcon /> New Customer
+      </IconButton>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Upcoming Customer</DialogTitle>
         <DialogContent>

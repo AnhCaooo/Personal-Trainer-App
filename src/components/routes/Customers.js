@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { AgGridReact } from "ag-grid-react";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import GetAppIcon from "@mui/icons-material/GetApp";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import AddCustomer from "../subcomponents/AddCustomer";
@@ -15,13 +16,14 @@ function Customers() {
   const [customers, setCustomers] = useState([]);
   const [open, setOpen] = useState(false);
   const [msg, setMsg] = useState("");
+  const gridRef = useRef();
 
   useEffect(() => {
     fetchCustomers();
   }, []);
 
   const fetchCustomers = () => {
-    fetch("https://customerrest.herokuapp.com/api/customers")
+    fetch(process.env.REACT_APP_API_URL + "/customers")
       .then((response) => response.json())
       .then((responseData) => {
         const customers = responseData.content.map((customer) => {
@@ -51,7 +53,7 @@ function Customers() {
   };
 
   const addCustomer = async (newCustomer) => {
-    await fetch("https://customerrest.herokuapp.com/api/customers", {
+    await fetch(process.env.REACT_APP_API_URL + "/customers", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newCustomer),
@@ -87,7 +89,7 @@ function Customers() {
   };
 
   const addTraining = async (newTraining) => {
-    await fetch("https://customerrest.herokuapp.com/api/trainings", {
+    await fetch(process.env.REACT_APP_API_URL + "/trainings", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newTraining),
@@ -182,9 +184,12 @@ function Customers() {
     },
   ]);
 
+  const exportCustomer = () => {
+    gridRef.current.api.exportDataAsCsv();
+  };
+
   return (
     <>
-      <AddCustomer addCustomer={addCustomer} />
       <div
         className="ag-theme-material"
         style={{ height: 650, width: "80%", margin: "auto" }}
@@ -195,8 +200,17 @@ function Customers() {
           pagination={true}
           paginationPageSize={10}
           suppressCellFocus={true}
+          ref={gridRef}
         ></AgGridReact>
+
+        <div style={{ flexDirection: "row" }}>
+          <AddCustomer addCustomer={addCustomer} />
+          <IconButton color="primary" onClick={() => exportCustomer()}>
+            <GetAppIcon /> Export Customers
+          </IconButton>
+        </div>
       </div>
+
       <Snackbar
         open={open}
         autoHideDuration={3000}

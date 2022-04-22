@@ -19,7 +19,7 @@ function Trainings() {
   }, []);
 
   const fetchTrainings = () => {
-    fetch("https://customerrest.herokuapp.com/gettrainings")
+    fetch(process.env.REACT_APP_TRAININGS_URL)
       .then((response) => response.json())
       .then((responseData) => setTrainings(responseData))
       .then((err) => console.error(err));
@@ -27,7 +27,7 @@ function Trainings() {
 
   const deleteTraining = async (id) => {
     if (window.confirm("Are you sure?")) {
-      await fetch(`https://customerrest.herokuapp.com/api/trainings/${id}`, {
+      await fetch(process.env.REACT_APP_API_URL + `/trainings/${id}`, {
         method: "DELETE",
       })
         .then((response) => {
