@@ -6,7 +6,6 @@ import format from "date-fns/format";
 import parse from "date-fns/parse";
 import startOfWeek from "date-fns/startOfWeek";
 import getDay from "date-fns/getDay";
-import toDate from "date-fns/toDate";
 import enUS from "date-fns/locale/en-US";
 
 const locales = {
@@ -38,8 +37,6 @@ function CalendarScreen() {
   const views = Object.keys(Views).map((k) => Views[k]);
 
   const events = trainings.map((training) => {
-    //endDate = moment(training.date);
-    //endDate.setUTC
     return {
       id: training.id,
       title:
