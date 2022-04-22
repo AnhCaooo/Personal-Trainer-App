@@ -5,7 +5,7 @@ import Customers from "./components/routes/Customers";
 import Trainings from "./components/routes/Trainings";
 import PageNotFound from "./components/routes/PageNotFound";
 import Home from "./components/routes/Home";
-import Calendar from "./components/routes/Calendar";
+import CalendarScreen from "./components/routes/CalendarScreen";
 function App() {
   return (
     <div className="App">
@@ -15,7 +15,7 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/customers" element={<Customers />}></Route>
           <Route path="/trainings" element={<Trainings />}></Route>
-          <Route path="/calendar" element={<Calendar />}></Route>
+          <Route path="/calendar" element={<CalendarScreen />}></Route>
           <Route path="*" element={<PageNotFound />}></Route>
         </Routes>
       </BrowserRouter>
