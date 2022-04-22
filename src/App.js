@@ -6,6 +6,8 @@ import Trainings from "./components/routes/Trainings";
 import PageNotFound from "./components/routes/PageNotFound";
 import Home from "./components/routes/Home";
 import CalendarScreen from "./components/routes/CalendarScreen";
+import StatisticsScreen from "./components/routes/StatisticsScreen";
+
 function App() {
   return (
     <div className="App">
@@ -16,6 +18,7 @@ function App() {
           <Route path="/customers" element={<Customers />}></Route>
           <Route path="/trainings" element={<Trainings />}></Route>
           <Route path="/calendar" element={<CalendarScreen />}></Route>
+          <Route path="/statistics" element={<StatisticsScreen />}></Route>
           <Route path="*" element={<PageNotFound />}></Route>
         </Routes>
       </BrowserRouter>

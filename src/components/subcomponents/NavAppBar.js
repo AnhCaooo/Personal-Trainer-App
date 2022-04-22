@@ -7,33 +7,40 @@ import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import HomeIcon from "@mui/icons-material/Home";
+import EqualizerIcon from "@mui/icons-material/Equalizer";
 
 function NavAppBar() {
   return (
     <>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6">
+          <Typography variant="h6" align="justify">
             <Link style={{ textDecoration: "none", color: "white" }} to="/">
-              <HomeIcon /> Home
+              <HomeIcon /> Home |
             </Link>{" "}
             <Link
               style={{ textDecoration: "none", color: "white" }}
               to="/customers"
             >
-              <PeopleAltIcon /> Customers
+              <PeopleAltIcon /> Customers |
             </Link>{" "}
             <Link
               style={{ textDecoration: "none", color: "white" }}
               to="/trainings"
             >
-              <FitnessCenterIcon /> Trainings
+              <FitnessCenterIcon /> Trainings |
             </Link>{" "}
             <Link
               style={{ textDecoration: "none", color: "white" }}
               to="/calendar"
             >
-              <CalendarMonthIcon /> Calendar
+              <CalendarMonthIcon /> Calendar |
+            </Link>
+            <Link
+              style={{ textDecoration: "none", color: "white" }}
+              to="/statistics"
+            >
+              <EqualizerIcon /> Statistics |
             </Link>
           </Typography>
         </Toolbar>
